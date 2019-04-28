@@ -1,0 +1,13 @@
+name: prayer
+version: 0.1.0
+
+authors:
+  - Bajro <balisitg@gmail.com>
+
+targets:
+  prayer:
+    main: src/prayer.cr
+
+crystal: 0.27.2
+
+license: MIT
