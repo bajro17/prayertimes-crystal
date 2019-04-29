@@ -160,7 +160,7 @@ class Prayer
 
     if (@methods[@calcMethod][1] == 1.0) # Maghrib
       timearray[5] = timearray[4] + @methods[@calcMethod][2]/60
-      puts timearray[4]
+     
     end
     if (@methods[@calcMethod][3] == 1.0) # Isha
       timearray[6] = timearray[5] + @methods[@calcMethod][4]/60
@@ -188,6 +188,23 @@ class Prayer
     # return $this->adjustTimesFormat($times);
   end
 
+  def correctionForTimes(corrections)
+    counter = 0
+    @timeNames.each do |key, value|
+      minutes = @timeNames[key].split(":")[1].to_i32 + (corrections[counter])
+      @timeNames[key] = "#{@timeNames[key].split(":")[0].to_s}:#{minutes.to_s}"
+      counter += 1
+    end
+    @timeNames
+    # @timeNames["fajr"].split(":")[1].to_i32 + (fajr)
+    # @timeNames["sunrise"].split(":")[1].to_i32 + (sunrise)
+    # @timeNames["dhuhr"].split(":")[1].to_i32 + (dhuhr)
+    # @timeNames["asr"].split(":")[1].to_i32 + (asr)
+    # @timeNames["sunset"].split(":")[1].to_i32 + (sunset)
+    # @timeNames["maghrib"].split(":")[1].to_i32 + (maghrib)
+    # @timeNames["isha"].split(":")[1].to_i32 + (isha)
+  end
+
   def computeAsr(step, t) # Shafii: step=1, Hanafi: step=2
     d = self.sunPosition(@jdate + t)[0]
     g = -self.arccot(step + self.tan((@lat - d).abs))
@@ -205,4 +222,5 @@ class Prayer
 end
 
 a = Prayer.new
-puts a.getDatePrayerTimes(2019, 4, 28, 6.2088, 106.8456, 7)
+puts a.getDatePrayerTimes(2019, 4, 29, 40.8504, -73.9369, -4)
+    puts a.correctionForTimes([-5,-5,-1,-1,6,6,0])
