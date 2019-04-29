@@ -188,7 +188,7 @@ class Prayer
     # return $this->adjustTimesFormat($times);
   end
 
-  def correctionForTimes(corrections)
+  def correctionForTimes(corrections : Array(Int32))
     counter = 0
     @timeNames.each do |key, value|
       minutes = @timeNames[key].split(":")[1].to_i32 + (corrections[counter])
