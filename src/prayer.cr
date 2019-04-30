@@ -195,7 +195,7 @@ class Prayer
       @timeNames[key] = "#{@timeNames[key].split(":")[0].to_s}:#{minutes.to_s}"
       counter += 1
     end
-    @timeNames
+    @timeNames.to_json
     # @timeNames["fajr"].split(":")[1].to_i32 + (fajr)
     # @timeNames["sunrise"].split(":")[1].to_i32 + (sunrise)
     # @timeNames["dhuhr"].split(":")[1].to_i32 + (dhuhr)
@@ -221,6 +221,3 @@ class Prayer
   end
 end
 
-a = Prayer.new
-puts a.getDatePrayerTimes(2019, 4, 29, 40.8504, -73.9369, -4)
-    puts a.correctionForTimes([-5,-5,-1,-1,6,6,0])

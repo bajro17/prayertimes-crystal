@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" placeholder="Enter Latitude" v-model="lat">
+        <input type="text" placeholder="Enter Longitude" v-model="lng">
+        <input type="date" v-model="date">
+        <input type="text" placeholder="Enter Timezone" v-model="tz">
+        <input type="text" placeholder="Enter Method (default MWL)" v-model="method">
+        <button @click="getTimes">Get Times</button>
+        <h3>Fajr: {{fajr}}</h3>
+        <h3>Sunrise: {{sunrise}}</h3>
+        <h3>Duhr: {{duhr}}</h3>
+        <h3>Asr: {{asr}}</h3>
+        <h3>Maghrib: {{maghrib}}</h3>
+        <h3>Isha : {{isha}}</h3>
+    </div>
+    <script>
+    new Vue({
+        el: "#app",
+        data: {
+            fajr: "",
+            sunrise: "",
+            duhr: "",
+            asr: "",
+            maghrib: "",
+            isha: "",
+            lat: 0,
+            lng: 0,
+            method: "",
+            tz: "",
+            date: '',
+            fajrtweak: "",
+            sunrisetweak: "",
+            duhrtweak: "",
+            asrtweak: "",
+            maghribtweak: "",
+            ishatweak: "",
+            julian: 0,
+        },
+          methods: {
+                getTimes: function () {
+                    var t = this.date;
+                    var arr = t.split("-");
+                    var year = arr[0];
+                    var month = arr[1];
+                    var day = arr[2];
+                    var self = this;
+                axios.get("/gettimes/"+year+"/"+month+"/"+day+"/"+this.lat+"/"+this.lng+"/"+this.tz+"/"+this.method)
+                .then(function (response) {
+                    self.fajr = response.data["fajr"];
+                    self.sunrise = response.data["sunrise"];
+                    self.duhr = response.data["dhuhr"];
+                    self.asr = response.data["asr"];
+                    self.maghrib = response.data["maghrib"];
+                    self.isha = response.data["isha"];
+                    
+                });
+                
+            }
+          }
+    });
+    </script>
+</body>
+</html>
