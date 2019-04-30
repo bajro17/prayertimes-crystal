@@ -6,7 +6,7 @@ authors:
 
 targets:
   prayer:
-    main: src/prayer.cr
+    main: src/prayerweb.cr
 
 crystal: 0.27.2
 
