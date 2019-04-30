@@ -1,11 +1,11 @@
-name: prayer
+name: prayerweb
 version: 0.1.0
 
 authors:
   - Bajro <balisitg@gmail.com>
 
 targets:
-  prayer:
+  prayerweb:
     main: src/prayerweb.cr
 
 crystal: 0.27.2

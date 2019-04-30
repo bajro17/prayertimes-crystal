@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe Prayer do
+describe Prayerweb do
   # TODO: Write tests
 
   it "works" do
